@@ -13,14 +13,20 @@ public class Rasterization {
             final Color startColor,
             final Color tailColor ){
         final PixelWriter pixelWriter = graphicsContext.getPixelWriter();
-
+        float red = (float) ((startColor.getRed() - tailColor.getRed()) / 2 / b);
+        float green = (float) (startColor.getGreen() - tailColor.getGreen()) / 2/ b;
+        float blue = (float) (startColor.getBlue() - tailColor.getBlue()) /2 / b;
         int x1, x2, x;
+        Color c = startColor;
         for(int i = y0 - b; i <= y0 + b; i++){
             x = (int) Math.sqrt(a * a * (1 - (float)(i - y0) * (float)(i - y0) / (float)b /(float)b));
             x1 = x0 - x;
             x2 = x0 + x;
             for (int j = x1; j <= x2; j++){
-                pixelWriter.setColor(j, i , startColor);
+                pixelWriter.setColor(j, i , c);
+            }
+            if(c.getRed() + red < 1 && c.getGreen() + green < 1 && c.getBlue() + blue < 1){
+                c = Color.color(c.getRed() + red, c.getGreen() + green, c.getBlue() + blue);
             }
         }
 
