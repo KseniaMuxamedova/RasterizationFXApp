@@ -19,11 +19,9 @@ public class RasterizationController {
     private void initialize() {
         anchorPane.prefWidthProperty().addListener((ov, oldValue, newValue) -> canvas.setWidth(newValue.doubleValue()));
         anchorPane.prefHeightProperty().addListener((ov, oldValue, newValue) -> canvas.setHeight(newValue.doubleValue()));
-        Color c1 = Color.rgb(54, 103, 190);
-        Color c2 = Color.rgb(190, 103, 54);
-        Rasterization.drawOval(canvas.getGraphicsContext2D(), 200, 200, 50, 25, c1, c2);
-        //Rasterization.drawRectangle(, 200, 300, 200, 100, Color.CHOCOLATE);
-        //Rasterization.drawRectangle(canvas.getGraphicsContext2D(), 250, 250, 50, 200, Color.AQUA);
+        Color c1 = Color.rgb(239, 9, 205);
+        Color c2 = Color.rgb(64, 204, 1);
+        Rasterization.drawOval(canvas.getGraphicsContext2D(), 400, 300, 300, 200, 239, 9, 205,  64, 204, 1);
     }
 
 }
