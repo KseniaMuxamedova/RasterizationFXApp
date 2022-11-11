@@ -10,27 +10,21 @@ public class Rasterization {
             final GraphicsContext graphicsContext,
             final int x0, final int y0,
             final int a, final int b,
-            //int startRED, int startGREEN, int startBLUE,
-            //int endRED, int endGREEN, int endBLUE,
             Color startColor,
             final Color tailColor) {
         final PixelWriter pixelWriter = graphicsContext.getPixelWriter();
-        //Color c = Color.rgb(startRED, startGREEN, startBLUE);
+        //начальные оттенки
         int cRed = toRGB(startColor.getRed());
         int cGreen = toRGB(startColor.getGreen());
         int cBlue = toRGB(startColor.getBlue());
+        //нахождение отрезков
         int red = findRaznost(cRed, toRGB(tailColor.getRed()), b);
         int green = findRaznost(cGreen, toRGB(tailColor.getGreen()), b);
         int blue = findRaznost(cBlue, toRGB(tailColor.getBlue()), b);
+        //нахождение -1 или 1 операция с цветом
         int rk = findK(cRed, toRGB(tailColor.getRed()));
         int gk = findK(cGreen, toRGB(tailColor.getGreen()));
         int bk = findK(cBlue, toRGB(tailColor.getBlue()));
-        //int redK = findRaznost(startRED, endRED, b);
-        //int rk = findK(startRED, endRED);
-        //int greenK = findRaznost(startGREEN, endGREEN, b);
-        //int gk = findK(startGREEN, endGREEN);
-        //int blueK = findRaznost(startBLUE, endBLUE, b);
-        //int bk = findK(startBLUE, endBLUE);
         int x1, x2, x;
         int z = 1;
         for (int i = y0 - b; i <= y0 + b; i++, z++) {
@@ -43,20 +37,16 @@ public class Rasterization {
             cRed = newC(z, cRed, red, rk);
             cGreen = newC(z, cGreen, green, gk);
             cBlue = newC(z, cBlue, blue, bk);
-            /*startRED = newC(cRED, redK, rd, rk);
-            startGREEN = newC(startGREEN, greenK, gd, gk);
-            startBLUE = newC(startBLUE, blueK, bd, bk );*/
             startColor = Color.rgb(cRed, cGreen, cBlue);
-            /*rd =kofe(rd, redK);
-            gd = kofe(gd, greenK);
-            bd = kofe(bd, blueK);*/
         }
     }
 
+    //перевод в RGB
     private static int toRGB(double c) {
         return (int) (c * 186);
     }
 
+    //Изменение оттенка
     private static int newC(int i, int st, int d, int k){
         if(i % d == 0 && st + k > 0 && st + k < 255){
             st += k;
@@ -64,13 +54,7 @@ public class Rasterization {
         return st;
     }
 
-    private static int kofe(int c, int a){
-        if(c == a){
-            c = 0;
-        }
-        return c;
-    }
-
+    //Отрезки
     private static int findRaznost(int start, int tail, int b){
         if(start == tail){
             return 2*b;
@@ -78,6 +62,7 @@ public class Rasterization {
         return Math.round(Math.abs((2 * b) / (start - tail)));
     }
 
+    //-1 или 1
     private static int findK(int start, int tail){
         if(start > tail){
             return -1;

@@ -2,7 +2,6 @@ package com.cgvsu.rasterizationfxapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
 
 import com.cgvsu.rasterization.*;
@@ -25,9 +24,9 @@ public class RasterizationController {
         Color c3 = Color.rgb(0, 0, 0);
         Color c4 = Color.rgb(255, 255, 255);
         Rasterization.drawOval(canvas.getGraphicsContext2D(), 150, 220, 150, 220, c3, c4);
-        /*Color c5 = Color.rgb(255, 255, 255);
+        Color c5 = Color.rgb(255, 255, 255);
         Color c6 = Color.rgb(0, 0, 0);
-        Rasterization.drawOval(canvas.getGraphicsContext2D(), 200, 350, 100, 120, c5, c6);*/
+        Rasterization.drawOval(canvas.getGraphicsContext2D(), 200, 350, 100, 120, c5, c6);
 
     }
 
